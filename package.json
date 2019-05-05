@@ -1,6 +1,9 @@
 {
   "name": "@egoist/snackbar",
   "version": "0.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Show a brief message at the bottom of the screen.",
   "main": "dist/snackbar.js",
   "module": "dist/snackbar.es.js",
