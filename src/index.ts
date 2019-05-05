@@ -1,6 +1,6 @@
 import './style.css'
 
-interface Action {
+export interface Action {
   /**
    * Action button text
    */
@@ -21,10 +21,15 @@ interface Action {
   /**
    * Invoke a function when the action button is clicked
    */
-  callback?: (button: HTMLButtonElement, snackbar: SnackBar) => void
+  callback?: ActionCallback
 }
 
-type Position = 'left' | 'center' | 'right'
+export type ActionCallback = (
+  button: HTMLButtonElement,
+  snackbar: SnackBar
+) => void
+
+export type Position = 'left' | 'center' | 'right'
 
 export interface SnackOptions {
   /**
