@@ -1,6 +1,6 @@
 # SnackBar
 
-Show a brief message at the bottom of the screen.
+A tiny browser library for showing a brief message at the bottom of the screen (1kB gzipped).
 
 ## Use with bundler
 
