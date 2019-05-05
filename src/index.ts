@@ -110,7 +110,7 @@ export class SnackBar {
         const { style, text, callback } = action
         const button = document.createElement('button')
         button.className = 'snackbar--button'
-        button.textContent = text
+        button.innerHTML = text
         if (style) {
           Object.keys(style).forEach(key => {
             button.style[key as any] = style[key]
