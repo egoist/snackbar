@@ -16,7 +16,7 @@
     "dist/snackbar.min.css"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "echo lol",
     "demo": "poi -so --config demo/poi.config.js",
     "build:demo": "yarn docs && poi --prod --config demo/poi.config.js",
     "build": "bili",
