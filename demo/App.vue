@@ -64,7 +64,7 @@ body {
   line-height: 1.5;
   max-width: 80ex;
   margin: 20px;
-  margin-bottom: 80px;
+  margin-bottom: 120px;
 }
 
 a {
