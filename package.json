@@ -1,0 +1,58 @@
+{
+  "name": "@egoist/snackbar",
+  "version": "0.0.0",
+  "description": "Show a brief message at the bottom of the screen.",
+  "main": "dist/snackbar.js",
+  "module": "dist/snackbar.es.js",
+  "files": [
+    "dist/index.d.ts",
+    "dist/snackbar.es.js",
+    "dist/snackbar.js",
+    "dist/snackbar.min.js",
+    "dist/snackbar.css",
+    "dist/snackbar.min.css"
+  ],
+  "scripts": {
+    "test": "jest",
+    "demo": "poi -so --config demo/poi.config.js",
+    "build:demo": "yarn docs && poi --prod --config demo/poi.config.js",
+    "build": "bili",
+    "docs": "typedoc --mode file --out demo/public/docs --readme none --theme minimal",
+    "prepublishOnly": "yarn build"
+  },
+  "repository": {
+    "url": "egoist/snackbar",
+    "type": "git"
+  },
+  "author": "egoist<0x142857@gmail.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@poi/plugin-typescript": "^12.2.1",
+    "bili": "^4.7.3",
+    "husky": "^1.0.0-rc.13",
+    "lint-staged": "^7.2.0",
+    "poi": "^12.6.8",
+    "postcss-preset-env": "^6.6.0",
+    "prettier": "^1.15.2",
+    "prismjs": "^1.16.0",
+    "rollup-plugin-typescript2": "^0.21.0",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.4.5",
+    "vmark": "^1.1.0",
+    "vmark-loader": "^1.0.0",
+    "vue": "^2.6.10",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,js,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}

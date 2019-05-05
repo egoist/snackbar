@@ -1,0 +1,5 @@
+{
+  "source": "./src",
+  "destination": "./demo/public/docs",
+  "plugins": [{ "name": "esdoc-standard-plugin", "option": { "enable": true } }]
+}
