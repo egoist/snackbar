@@ -20,7 +20,7 @@
     "demo": "poi -so --config demo/poi.config.js",
     "build:demo": "yarn docs && poi --prod --config demo/poi.config.js",
     "build": "bili",
-    "docs": "typedoc --mode file --out demo/public/docs --readme none --theme minimal",
+    "docs": "typedoc src/index.ts --mode file --out demo/public/docs --readme none --theme minimal --excludeNotExported",
     "prepublishOnly": "yarn build"
   },
   "repository": {
