@@ -22,7 +22,7 @@ export default {
           style: {
             color: 'cyan'
           },
-          callback: snackbar => snackbar.destroy()
+          callback: (_, snackbar) => snackbar.destroy()
         }
       ]
     })
@@ -34,7 +34,7 @@ export default {
           style: {
             color: 'red'
           },
-          callback: snackbar => snackbar.destroy()
+          callback: (_, snackbar) => snackbar.destroy()
         }
       ]
     })
@@ -47,7 +47,7 @@ export default {
           style: {
             color: 'lightgreen'
           },
-          callback: snackbar => snackbar.destroy()
+          callback: (_, snackbar) => snackbar.destroy()
         }
       ]
     })
