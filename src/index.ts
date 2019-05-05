@@ -21,7 +21,7 @@ interface Action {
   /**
    * Invoke a function when the action button is clicked
    */
-  callback?: (snackbar: SnackBar) => void
+  callback?: (button: HTMLButtonElement, snackbar: SnackBar) => void
 }
 
 type Position = 'left' | 'center' | 'right'
@@ -119,7 +119,7 @@ export class SnackBar {
         button.addEventListener('click', () => {
           this.stopTimer()
           if (callback) {
-            callback(this)
+            callback(button, this)
           }
         })
         el.appendChild(button)
