@@ -5,10 +5,10 @@ A tiny browser library for showing a brief message at the bottom of the screen (
 ## Use with bundler
 
 ```js
-import { SnackBar } from '@egoist/snackbar'
+import { createSnackbar } from '@egoist/snackbar'
 import '@egoist/snackbar/dist/snackbar.css'
 
-new SnackBar('hello', {
+createSnackbar('hello', {
   position: 'right'
 })
 ```
@@ -24,7 +24,7 @@ new SnackBar('hello', {
 <script src="https://unpkg.com/@egoist/snackbar/dist/snackbar.min.js"></script>
 
 <script>
-  new snackbar.SnackBar('hello')
+  snackbar.createSnackbar('hello')
 </script>
 ```
 

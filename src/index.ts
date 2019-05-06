@@ -26,7 +26,7 @@ export interface Action {
 
 export type ActionCallback = (
   button: HTMLButtonElement,
-  snackbar: SnackBar
+  snackbar: Snackbar
 ) => void
 
 export type Position = 'left' | 'center' | 'right'
@@ -58,7 +58,7 @@ export interface SnackResult {
   destroy: () => void
 }
 
-export class SnackBar {
+export class Snackbar {
   message: string
   options: SnackInstanceOptions
   wrapper: HTMLDivElement
@@ -125,6 +125,8 @@ export class SnackBar {
           this.stopTimer()
           if (callback) {
             callback(button, this)
+          } else {
+            this.destroy()
           }
         })
         el.appendChild(button)
@@ -186,4 +188,8 @@ function getTransitionEvent(el: HTMLDivElement): string | undefined {
     }
   }
   return
+}
+
+export function createSnackbar(message: string, options?: SnackOptions) {
+  return new Snackbar(message, options)
 }
