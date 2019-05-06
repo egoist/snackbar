@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { SnackBar } from '../src'
+import { createSnackbar } from '../src'
 import Content from './Content.md'
 
 export default {
@@ -14,7 +14,7 @@ export default {
   },
 
   mounted() {
-    new SnackBar('Such Snackbar', {
+    createSnackbar('Such Snackbar', {
       position: 'left',
       actions: [
         {
@@ -27,7 +27,7 @@ export default {
       ]
     })
 
-    new SnackBar('Very Tiny', {
+    createSnackbar('Very Tiny', {
       actions: [
         {
           text: 'dismiss',
@@ -39,7 +39,7 @@ export default {
       ]
     })
 
-    new SnackBar('Love it?', {
+    createSnackbar('Love it?', {
       position: 'right',
       actions: [
         {
