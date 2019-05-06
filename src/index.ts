@@ -58,7 +58,7 @@ export interface SnackResult {
   destroy: () => void
 }
 
-class Snackbar {
+export class Snackbar {
   message: string
   options: SnackInstanceOptions
   wrapper: HTMLDivElement
@@ -190,8 +190,6 @@ function getTransitionEvent(el: HTMLDivElement): string | undefined {
   return
 }
 
-function createSnackbar(message: string, options?: SnackOptions) {
+export function createSnackbar(message: string, options?: SnackOptions) {
   return new Snackbar(message, options)
 }
-
-export { createSnackbar, Snackbar }
