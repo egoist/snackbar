@@ -125,6 +125,8 @@ export class SnackBar {
           this.stopTimer()
           if (callback) {
             callback(button, this)
+          } else {
+            this.destroy()
           }
         })
         el.appendChild(button)
