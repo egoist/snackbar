@@ -58,6 +58,8 @@ export interface SnackResult {
   destroy: () => void
 }
 
+let instances: Snackbar[] = []
+
 export class Snackbar {
   message: string
   options: SnackInstanceOptions
@@ -83,6 +85,7 @@ export class Snackbar {
 
     this.wrapper = this.getWrapper(this.options.position)
     this.insert()
+    instances.push(this)
   }
 
   getWrapper(position: Position): HTMLDivElement {
@@ -192,4 +195,11 @@ function getTransitionEvent(el: HTMLDivElement): string | undefined {
 
 export function createSnackbar(message: string, options?: SnackOptions) {
   return new Snackbar(message, options)
+}
+
+export function destroyAllSnackbars() {
+  const cleanup = () => (instances = [])
+  return Promise.all(instances.map(instance => instance.destroy()))
+    .then(cleanup)
+    .catch(cleanup)
 }
