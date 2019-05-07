@@ -29,6 +29,7 @@ export type ActionCallback = (
   snackbar: Snackbar
 ) => void
 
+export type Alignment = 'top' | 'bottom'
 export type Position = 'left' | 'center' | 'right'
 
 export interface SnackOptions {
@@ -46,12 +47,18 @@ export interface SnackOptions {
    * @default `center`
    */
   position?: Position
+  /**
+   * Display snackbar at the top or bottom of the viewport
+   * @default `bottom`
+   */
+  alignment?: Alignment
 }
 
 export interface SnackInstanceOptions {
   timeout: number
   actions: Action[]
   position: Position
+  alignment: Alignment
 }
 
 export interface SnackResult {
@@ -74,27 +81,32 @@ export class Snackbar {
     const {
       timeout = 0,
       actions = [{ text: 'dismiss', callback: () => this.destroy() }],
-      position = 'center'
+      position = 'center',
+      alignment = 'bottom'
     } = options
     this.message = message
     this.options = {
       timeout,
       actions,
-      position
+      position,
+      alignment
     }
 
-    this.wrapper = this.getWrapper(this.options.position)
+    this.wrapper = this.getWrapper(
+      this.options.position,
+      this.options.alignment
+    )
     this.insert()
     instances.push(this)
   }
 
-  getWrapper(position: Position): HTMLDivElement {
+  getWrapper(position: Position, alignment: Alignment): HTMLDivElement {
     let wrapper = document.querySelector(
-      `.snackbars-${position}`
+      `.snackbars-${position} .snackbars-${alignment}`
     ) as HTMLDivElement
     if (!wrapper) {
       wrapper = document.createElement('div')
-      wrapper.className = `snackbars snackbars-${position}`
+      wrapper.className = `snackbars snackbars-${position} snackbars-${alignment}`
       document.body.appendChild(wrapper)
     }
     return wrapper

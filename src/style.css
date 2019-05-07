@@ -2,10 +2,33 @@
   display: block;
   position: fixed;
   left: 0;
-  bottom: 0;
   width: 100%;
   height: 0;
   overflow: visible;
+}
+
+.snackbars-bottom {
+  bottom: 0;
+
+  & .snackbar {
+    bottom: 24px;
+  }
+
+  & .snackbar[aria-hidden='true'] {
+    animation: snackbar-hide-bottom 300ms ease forwards 1;
+  }
+}
+
+.snackbars-top {
+  top: 0;
+
+  & .snackbar {
+    top: 24px;
+  }
+
+  & .snackbar[aria-hidden='true'] {
+    animation: snackbar-hide-top 300ms ease forwards 1;
+  }
 }
 
 .snackbar {
@@ -13,7 +36,6 @@
   display: flex;
   box-sizing: border-box;
   left: 50%;
-  bottom: 24px;
   width: 344px;
   margin-left: -172px;
   background: #2a2a2a;
@@ -25,10 +47,6 @@
   cursor: default;
   will-change: transform;
   animation: snackbar-show 300ms ease forwards 1;
-}
-
-.snackbar[aria-hidden='true'] {
-  animation: snackbar-hide 300ms ease forwards 1;
 }
 
 @media (min-width: 1080px) {
@@ -55,10 +73,17 @@
   }
 }
 
-@keyframes snackbar-hide {
+@keyframes snackbar-hide-bottom {
   to {
     opacity: 0;
     transform: translateY(100%);
+  }
+}
+
+@keyframes snackbar-hide-top {
+  to {
+    opacity: 0;
+    transform: translateY(-100%);
   }
 }
 
