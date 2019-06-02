@@ -7,6 +7,7 @@
   "description": "Show a brief message at the bottom of the screen.",
   "main": "dist/snackbar.js",
   "module": "dist/snackbar.es.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist/index.d.ts",
     "dist/snackbar.es.js",
