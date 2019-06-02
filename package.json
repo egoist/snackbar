@@ -9,6 +9,7 @@
   "module": "dist/snackbar.es.js",
   "types": "dist/index.d.ts",
   "files": [
+    "dist/index.d.ts",
     "dist/snackbar.es.js",
     "dist/snackbar.js",
     "dist/snackbar.min.js",
