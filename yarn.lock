@@ -1416,9 +1416,9 @@ big.js@^5.2.2:
   integrity sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==
 
 bili@^4.7.3:
-  version "4.7.3"
-  resolved "https://registry.yarnpkg.com/bili/-/bili-4.7.3.tgz#bd6dfda950985b3bb934b0379d3ea25ccb54dd4a"
-  integrity sha512-Gw44rVG8Cod2OI2XJP1HzO0JgL1wlBBwzGZTHSg06Gu15M71dq1I3Yxh8E+dteiyZrzGaN/OP/bxzKvQIPrGFw==
+  version "4.8.0"
+  resolved "https://registry.yarnpkg.com/bili/-/bili-4.8.0.tgz#9c526de9bf8657dee80e526fc78090f96206e4c2"
+  integrity sha512-HKp8S39PMhb9FGRLkjNYpttoTDgtwGHWcc+Jfa6ZW1GMx/aKkWETQw8pPHQLA0n0Nm+cZJunKfLckxsjh3tsfA==
   dependencies:
     "@babel/core" "^7.2.2"
     "@babel/plugin-proposal-object-rest-spread" "^7.3.1"
@@ -1435,7 +1435,7 @@ bili@^4.7.3:
     rollup-plugin-commonjs "^9.2.0"
     rollup-plugin-hashbang "^2.2.2"
     rollup-plugin-json "^3.1.0"
-    rollup-plugin-node-resolve "^4.0.1"
+    rollup-plugin-node-resolve "^4.2.3"
     rollup-plugin-postcss "^2.0.3"
     rollup-plugin-replace "^2.1.0"
     rollup-plugin-terser "^4.0.2"
@@ -6662,10 +6662,10 @@ rollup-plugin-json@^3.1.0:
   dependencies:
     rollup-pluginutils "^2.3.1"
 
-rollup-plugin-node-resolve@^4.0.1:
-  version "4.2.3"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-node-resolve/-/rollup-plugin-node-resolve-4.2.3.tgz#638a373a54287d19fcc088fdd1c6fd8a58e4d90a"
-  integrity sha512-r+WaesPzdGEynpLZLALFEDugA4ACa5zn7bc/+LVX4vAXQQ8IgDHv0xfsSvJ8tDXUtprfBtrDtRFg27ifKjcJTg==
+rollup-plugin-node-resolve@^4.2.3:
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-node-resolve/-/rollup-plugin-node-resolve-4.2.4.tgz#7d370f8d6fd3031006a0032c38262dd9be3c6250"
+  integrity sha512-t/64I6l7fZ9BxqD3XlX4ZeO6+5RLKyfpwE2CiPNUKa+GocPlQhf/C208ou8y3AwtNsc6bjSk/8/6y/YAyxCIvw==
   dependencies:
     "@types/resolve" "0.0.8"
     builtin-modules "^3.1.0"
