@@ -718,17 +718,10 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/plugin-transform-typescript" "^7.3.2"
 
-"@babel/runtime@^7.0.0":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.5", "@babel/runtime@^7.4.2":
   version "7.4.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.4.5.tgz#582bb531f5f9dc67d2fcb682979894f75e253f12"
   integrity sha512-TuI4qpWZP6lGOGIuGWtp9sPluqYICmbk8T/1vpSysqJxRPkudh/ofFWyqdcMsDf2s7KvDL4/YHgKyvcS3g9CJQ==
-  dependencies:
-    regenerator-runtime "^0.13.2"
-
-"@babel/runtime@^7.1.5", "@babel/runtime@^7.4.2":
-  version "7.4.4"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.4.4.tgz#dc2e34982eb236803aa27a07fea6857af1b9171d"
-  integrity sha512-w0+uT71b6Yi7i5SE0co4NioIpSYS6lLiXvCzWzGSKvpK5vdQtCbICHMj+gbAKAOtxiV6HsVh/MBdaF9EQ6faSg==
   dependencies:
     regenerator-runtime "^0.13.2"
 
@@ -798,10 +791,10 @@
   dependencies:
     chalk "^2.4.1"
 
-"@poi/plugin-html-entry@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@poi/plugin-html-entry/-/plugin-html-entry-0.1.4.tgz#063458847fc79210b0bc89bdec74caff33a50ff3"
-  integrity sha512-az+qOIILOeMjwbKtySrwCH7rJ0Y8MiATWMECZCz/ErvZBqFZuOxuKV/sz13NjBSg4QT5e0v/7+9HQRzbIAqCYw==
+"@poi/plugin-html-entry@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@poi/plugin-html-entry/-/plugin-html-entry-0.2.0.tgz#41194b79569ff311294ea37dcec782c9d34f98b6"
+  integrity sha512-2UOJIsSBY4e8SxGkxhI4XB/2DgTAQ/Z5OIApRE7gTjZySR0bMouf7bqsz0kQlj2JJsRLjv4aS5sS8fW3S82V7A==
   dependencies:
     chokidar "^2.0.4"
     fs-extra "^7.0.1"
@@ -5400,9 +5393,9 @@ please-upgrade-node@^3.0.2, please-upgrade-node@^3.1.1:
     semver-compare "^1.0.0"
 
 poi@^12.6.8:
-  version "12.6.8"
-  resolved "https://registry.yarnpkg.com/poi/-/poi-12.6.8.tgz#a0c21202c31d5036b7d20ac75480664fc3b68913"
-  integrity sha512-MQqLIheQDdhDqCOLIBsyKxOwd5f1Fsm9Jpr3MDdqG1ETTy9lDEIWWozidjKRQE0gIQ8XPFtgXcGYLDk5Cto1SA==
+  version "12.6.10"
+  resolved "https://registry.yarnpkg.com/poi/-/poi-12.6.10.tgz#62a132dc12591174bc1a264e561feb0df4170fe5"
+  integrity sha512-0EOOlzo9s9GgDP/MZqIo6niVuW9jfJbVehEhEk+c1C03FeVZMsXfrxKi91HM79t3YZPlA8U6maoiY0RSibNMbw==
   dependencies:
     "@babel/core" "^7.1.6"
     "@babel/plugin-proposal-class-properties" "^7.1.0"
@@ -5418,7 +5411,7 @@ poi@^12.6.8:
     "@intervolga/optimize-cssnano-plugin" "^1.0.6"
     "@poi/dev-utils" "^12.1.1"
     "@poi/logger" "^12.0.0"
-    "@poi/plugin-html-entry" "^0.1.4"
+    "@poi/plugin-html-entry" "^0.2.0"
     "@poi/pnp-webpack-plugin" "^0.0.2"
     babel-helper-vue-jsx-merge-props "^2.0.3"
     babel-loader "^8.0.4"
