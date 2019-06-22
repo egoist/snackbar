@@ -136,13 +136,16 @@ export class Snackbar {
       }
     }
 
-    // Add timeout
-    if (this.options.timeout) {
-      this.timeoutId = self.setTimeout(
-        () => this.destroy(),
-        this.options.timeout
-      )
-    }
+    this.startTimer()
+
+    // Stop timer when mouseenter
+    // Restart timer when mouseleave
+    el.addEventListener('mouseenter', () => {
+      this.stopTimer()
+    })
+    el.addEventListener('mouseleave', () => {
+      this.startTimer()
+    })
 
     this.el = el
 
@@ -170,9 +173,19 @@ export class Snackbar {
     this.el = undefined
   }
 
+  startTimer() {
+    if (this.options.timeout && !this.timeoutId) {
+      this.timeoutId = self.setTimeout(
+        () => this.destroy(),
+        this.options.timeout
+      )
+    }
+  }
+
   stopTimer() {
     if (this.timeoutId) {
       clearTimeout(this.timeoutId)
+      this.timeoutId = undefined
     }
   }
 }
