@@ -46,19 +46,35 @@ export interface SnackOptions {
    * @default `center`
    */
   position?: Position
+  theme?: 'string' | ThemeRules
 }
 
 export interface SnackInstanceOptions {
   timeout: number
   actions: Action[]
   position: Position
+  theme: ThemeRules
 }
 
 export interface SnackResult {
   destroy: () => void
 }
 
+interface ThemeRules {
+  backgroundColor?: string
+  textColor?: string
+  boxShadow?: string
+}
+
 let instances: Snackbar[] = []
+
+const themes: { [name: string]: ThemeRules } = {
+  light: {
+    backgroundColor: '#fff',
+    textColor: '#000'
+  },
+  dark: {}
+}
 
 export class Snackbar {
   message: string
@@ -74,18 +90,24 @@ export class Snackbar {
     const {
       timeout = 0,
       actions = [{ text: 'dismiss', callback: () => this.destroy() }],
-      position = 'center'
+      position = 'center',
+      theme = 'dark'
     } = options
     this.message = message
     this.options = {
       timeout,
       actions,
-      position
+      position,
+      theme: typeof theme === 'string' ? themes[theme] : theme
     }
 
     this.wrapper = this.getWrapper(this.options.position)
     this.insert()
     instances.push(this)
+  }
+
+  get theme() {
+    return this.options.theme
   }
 
   getWrapper(position: Position): HTMLDivElement {
@@ -106,6 +128,17 @@ export class Snackbar {
     el.setAttribute('aria-live', 'assertive')
     el.setAttribute('aria-atomic', 'true')
     el.setAttribute('aria-hidden', 'false')
+
+    const { backgroundColor, textColor, boxShadow } = this.theme
+    if (backgroundColor) {
+      el.style.backgroundColor = backgroundColor
+    }
+    if (textColor) {
+      el.style.color = textColor
+    }
+    if (boxShadow) {
+      el.style.boxShadow = boxShadow
+    }
 
     const text = document.createElement('div')
     text.className = 'snackbar--text'

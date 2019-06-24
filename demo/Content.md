@@ -88,6 +88,14 @@ createSnackbar('hello world', {
 
 <button @click="createConfirmSnackbar">Show message</button>
 
+### Use light theme
+
+<button @click="createSnackbar('light theme', {
+theme: 'light'
+})">Show message</button>
+
+<!-- add content above -->
+
 <script>
 import { destroyAllSnackbars, createSnackbar } from '../src'
 
