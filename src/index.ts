@@ -158,6 +158,7 @@ export class Snackbar {
   async destroy() {
     const { el, wrapper } = this
     if (el) {
+      this.el = undefined
       // Transition the snack away.
       el.setAttribute('aria-hidden', 'true')
       await new Promise(resolve => {
@@ -170,7 +171,6 @@ export class Snackbar {
       })
       wrapper.removeChild(el)
     }
-    this.el = undefined
   }
 
   startTimer() {
