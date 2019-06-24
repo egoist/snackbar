@@ -159,6 +159,7 @@ export class Snackbar {
     const { el, wrapper } = this
     if (el) {
       this.el = undefined
+      instances.splice(instances.indexOf(this), 1)
       // Transition the snack away.
       el.setAttribute('aria-hidden', 'true')
       await new Promise(resolve => {
