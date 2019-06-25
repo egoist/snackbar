@@ -60,10 +60,11 @@ export interface SnackResult {
   destroy: () => void
 }
 
-interface ThemeRules {
+export interface ThemeRules {
   backgroundColor?: string
   textColor?: string
   boxShadow?: string
+  actionColor?: string
 }
 
 let instances: Snackbar[] = []
@@ -71,7 +72,8 @@ let instances: Snackbar[] = []
 const themes: { [name: string]: ThemeRules } = {
   light: {
     backgroundColor: '#fff',
-    textColor: '#000'
+    textColor: '#000',
+    actionColor: '#008000'
   },
   dark: {}
 }
@@ -129,7 +131,7 @@ export class Snackbar {
     el.setAttribute('aria-atomic', 'true')
     el.setAttribute('aria-hidden', 'false')
 
-    const { backgroundColor, textColor, boxShadow } = this.theme
+    const { backgroundColor, textColor, boxShadow, actionColor } = this.theme
     if (backgroundColor) {
       el.style.backgroundColor = backgroundColor
     }
@@ -152,6 +154,9 @@ export class Snackbar {
         const button = document.createElement('button')
         button.className = 'snackbar--button'
         button.innerHTML = text
+        if (actionColor) {
+          button.style.color = actionColor
+        }
         if (style) {
           Object.keys(style).forEach(key => {
             button.style[key as any] = style[key]
