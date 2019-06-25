@@ -88,6 +88,48 @@ createSnackbar('hello world', {
 
 <button @click="createConfirmSnackbar">Show message</button>
 
+Check out [the docs](/docs/interfaces/snackoptions.html#actions) for `actions` option.
+
+### Light theme
+
+```js
+import { createSnackbar } from '@egoist/snackbar'
+
+createSnackbar('light theme', {
+  theme: 'light'
+})
+```
+
+<button @click="createSnackbar('light theme', {
+theme: 'light'
+})">Show message</button>
+
+Check out [the docs](/docs/interfaces/snackoptions.html#theme) for `theme` option.
+
+### Custom theme
+
+```js
+import { createSnackbar } from '@egoist/snackbar'
+
+createSnackbar('light theme', {
+  theme: {
+    backgroundColor: 'magenta',
+    actionColor: 'cyan'
+  }
+})
+```
+
+<button @click="createSnackbar('light theme', {
+theme: {
+backgroundColor: 'magenta',
+actionColor: 'cyan'
+}
+})">Show message</button>
+
+Check out [all properties](/docs/interfaces/themerules.html) under the `theme` option.
+
+<!-- add content above -->
+
 <script>
 import { destroyAllSnackbars, createSnackbar } from '../src'
 
