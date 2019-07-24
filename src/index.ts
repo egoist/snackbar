@@ -190,6 +190,20 @@ export class Snackbar {
     this.wrapper.appendChild(el)
   }
 
+  stack() {
+    const l = instances.length
+    instances.forEach((instance, i) => {
+      if (instance.el) {
+        console.log(
+          `translate3d(0, -${(l - i) * 15}px, -${l - i}px), scale(${1 -
+            0.05 * (l - i)})`
+        )
+        instance.el.style.transform = `translate3d(0, -${(l - i) * 15}px, -${l -
+          i}px), scale(${1 - 0.05 * (l - i)})`
+      }
+    })
+  }
+
   /**
    * Destory the snackbar
    */
