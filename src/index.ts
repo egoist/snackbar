@@ -103,6 +103,7 @@ export class Snackbar {
    */
   el?: HTMLDivElement
   private timeoutId?: number
+  private visibilityTimeoutId?: number
 
   constructor(message: string, options: SnackOptions = {}) {
     const {
@@ -212,42 +213,63 @@ export class Snackbar {
   }
 
   stack() {
+    this.toggleVisibility()
     instanceStackStatus[this.options.position] = true
     const positionInstances = instances[this.options.position]
     const l = positionInstances.length - 1
     positionInstances.forEach((instance, i) => {
       // Resume all instances' timers if applicable
       instance.startTimer()
-      if (instance.el) {
-        instance.el.style.transform = `translate3d(0, -${(l - i) * 15}px, -${l -
+      const { el } = instance
+      if (el) {
+        el.style.transform = `translate3d(0, -${(l - i) * 15}px, -${l -
           i}px) scale(${1 - 0.05 * (l - i)})`
         if (l - i >= this.options.maxStack) {
-          instance.el.style.opacity = '0'
+          el.style.opacity = '0'
         } else {
-          instance.el.style.opacity = '1'
+          el.style.opacity = '1'
         }
       }
     })
   }
 
   expand() {
-    // Do not expand when hovering on hidden snackbar
-    if (this.el !== undefined && this.el.style.opacity === '0') {
-      return
-    }
+    this.toggleVisibility()
     instanceStackStatus[this.options.position] = false
     const positionInstances = instances[this.options.position]
     const l = positionInstances.length - 1
     positionInstances.forEach((instance, i) => {
       // Stop all instances' timers to prevent destroy
       instance.stopTimer()
-      if (instance.el) {
-        instance.el.style.transform = `translate3d(0, -${(l - i) *
-          instance.el.clientHeight}px, 0) scale(1)`
+      const { el } = instance
+      if (el) {
+        el.style.transform = `translate3d(0, -${(l - i) *
+          el.clientHeight}px, 0) scale(1)`
         if (l - i >= this.options.maxStack) {
-          instance.el.style.opacity = '0'
+          el.style.opacity = '0'
         } else {
-          instance.el.style.opacity = '1'
+          el.style.opacity = '1'
+        }
+      }
+    })
+  }
+
+  toggleVisibility() {
+    const positionInstances = instances[this.options.position]
+    const l = positionInstances.length - 1
+    positionInstances.forEach((instance, i) => {
+      const { el } = instance
+      if (el) {
+        if (l - i >= this.options.maxStack) {
+          this.visibilityTimeoutId = self.setTimeout(() => {
+            el.style.visibility = 'hidden'
+          }, 300)
+        } else {
+          if (this.visibilityTimeoutId) {
+            clearTimeout(this.visibilityTimeoutId)
+            this.visibilityTimeoutId = undefined
+          }
+          el.style.visibility = 'visible'
         }
       }
     })
@@ -306,6 +328,22 @@ export class Snackbar {
       this.timeoutId = undefined
     }
   }
+}
+
+function getTransitionEvent(el: HTMLDivElement): string | undefined {
+  const transitions: { [k: string]: string } = {
+    transition: 'transitionend',
+    OTransition: 'oTransitionEnd',
+    MozTransition: 'Transitionend',
+    WebkitTransition: 'webkitTransitionEnd'
+  }
+
+  for (const key of Object.keys(transitions)) {
+    if (el.style[key as any] !== undefined) {
+      return transitions[key]
+    }
+  }
+  return
 }
 
 function getAnimationEvent(el: HTMLDivElement): string | undefined {
