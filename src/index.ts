@@ -330,22 +330,6 @@ export class Snackbar {
   }
 }
 
-function getTransitionEvent(el: HTMLDivElement): string | undefined {
-  const transitions: { [k: string]: string } = {
-    transition: 'transitionend',
-    OTransition: 'oTransitionEnd',
-    MozTransition: 'Transitionend',
-    WebkitTransition: 'webkitTransitionEnd'
-  }
-
-  for (const key of Object.keys(transitions)) {
-    if (el.style[key as any] !== undefined) {
-      return transitions[key]
-    }
-  }
-  return
-}
-
 function getAnimationEvent(el: HTMLDivElement): string | undefined {
   const animations: { [k: string]: string } = {
     animation: 'animationend',
