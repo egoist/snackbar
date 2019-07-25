@@ -47,6 +47,11 @@ export interface SnackOptions {
    */
   position?: Position
   theme?: 'string' | ThemeRules
+  /**
+   * Maximum stacks to display, earlier created snackbar will be hidden
+   * @default 3
+   */
+  maxStack?: number
 }
 
 export interface SnackInstanceOptions {
@@ -54,6 +59,7 @@ export interface SnackInstanceOptions {
   actions: Action[]
   position: Position
   theme: ThemeRules
+  maxStack: number
 }
 
 export interface SnackResult {
@@ -103,13 +109,15 @@ export class Snackbar {
       timeout = 0,
       actions = [{ text: 'dismiss', callback: () => this.destroy() }],
       position = 'center',
-      theme = 'dark'
+      theme = 'dark',
+      maxStack = 3
     } = options
     this.message = message
     this.options = {
       timeout,
       actions,
       position,
+      maxStack,
       theme: typeof theme === 'string' ? themes[theme] : theme
     }
 
@@ -191,14 +199,10 @@ export class Snackbar {
 
     this.startTimer()
 
-    // Stop timer when mouseenter
-    // Restart timer when mouseleave
     el.addEventListener('mouseenter', () => {
-      this.stopTimer()
       this.expand()
     })
     el.addEventListener('mouseleave', () => {
-      this.startTimer()
       this.stack()
     })
 
@@ -212,10 +216,12 @@ export class Snackbar {
     const positionInstances = instances[this.options.position]
     const l = positionInstances.length - 1
     positionInstances.forEach((instance, i) => {
+      // Resume all instances' timers if applicable
+      instance.startTimer()
       if (instance.el) {
         instance.el.style.transform = `translate3d(0, -${(l - i) * 15}px, -${l -
           i}px) scale(${1 - 0.05 * (l - i)})`
-        if (l - i >= 3) {
+        if (l - i >= this.options.maxStack) {
           instance.el.style.opacity = '0'
         } else {
           instance.el.style.opacity = '1'
@@ -229,10 +235,12 @@ export class Snackbar {
     const positionInstances = instances[this.options.position]
     const l = positionInstances.length - 1
     positionInstances.forEach((instance, i) => {
+      // Stop all instances' timers to prevent destroy
+      instance.stopTimer()
       if (instance.el) {
         instance.el.style.transform = `translate3d(0, -${(l - i) *
           instance.el.clientHeight}px, 0) scale(1)`
-        if (l - i >= 3) {
+        if (l - i >= this.options.maxStack) {
           instance.el.style.opacity = '0'
         } else {
           instance.el.style.opacity = '1'
