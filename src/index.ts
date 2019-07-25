@@ -326,6 +326,8 @@ export function createSnackbar(message: string, options?: SnackOptions) {
 
 export function destroyAllSnackbars() {
   let instancesArray: Snackbar[] = []
-  Object.values(instances).forEach(map => instancesArray.push(...map.values()))
+  Object.keys(instances)
+    .map(position => instances[position])
+    .forEach(positionInstances => instancesArray.push(...positionInstances))
   return Promise.all(instancesArray.map(instance => instance.destroy()))
 }
