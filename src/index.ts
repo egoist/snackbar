@@ -231,6 +231,10 @@ export class Snackbar {
   }
 
   expand() {
+    // Do not expand when hovering on hidden snackbar
+    if (this.el !== undefined && this.el.style.opacity === '0') {
+      return
+    }
     instanceStackStatus[this.options.position] = false
     const positionInstances = instances[this.options.position]
     const l = positionInstances.length - 1
