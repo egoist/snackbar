@@ -103,7 +103,6 @@ export class Snackbar {
    */
   el?: HTMLDivElement
   private timeoutId?: number
-  private visibilityTimeoutId?: number
 
   constructor(message: string, options: SnackOptions = {}) {
     const {
@@ -213,7 +212,6 @@ export class Snackbar {
   }
 
   stack() {
-    this.toggleVisibility()
     instanceStackStatus[this.options.position] = true
     const positionInstances = instances[this.options.position]
     const l = positionInstances.length - 1
@@ -224,17 +222,13 @@ export class Snackbar {
       if (el) {
         el.style.transform = `translate3d(0, -${(l - i) * 15}px, -${l -
           i}px) scale(${1 - 0.05 * (l - i)})`
-        if (l - i >= this.options.maxStack) {
-          el.style.opacity = '0'
-        } else {
-          el.style.opacity = '1'
-        }
+        const hidden = l - i >= this.options.maxStack
+        this.toggleVisibility(el, hidden)
       }
     })
   }
 
   expand() {
-    this.toggleVisibility()
     instanceStackStatus[this.options.position] = false
     const positionInstances = instances[this.options.position]
     const l = positionInstances.length - 1
@@ -245,34 +239,22 @@ export class Snackbar {
       if (el) {
         el.style.transform = `translate3d(0, -${(l - i) *
           el.clientHeight}px, 0) scale(1)`
-        if (l - i >= this.options.maxStack) {
-          el.style.opacity = '0'
-        } else {
-          el.style.opacity = '1'
-        }
+        const hidden = l - i >= this.options.maxStack
+        this.toggleVisibility(el, hidden)
       }
     })
   }
 
-  toggleVisibility() {
-    const positionInstances = instances[this.options.position]
-    const l = positionInstances.length - 1
-    positionInstances.forEach((instance, i) => {
-      const { el } = instance
-      if (el) {
-        if (l - i >= this.options.maxStack) {
-          this.visibilityTimeoutId = self.setTimeout(() => {
-            el.style.visibility = 'hidden'
-          }, 300)
-        } else {
-          if (this.visibilityTimeoutId) {
-            clearTimeout(this.visibilityTimeoutId)
-            this.visibilityTimeoutId = undefined
-          }
-          el.style.visibility = 'visible'
-        }
-      }
-    })
+  toggleVisibility(el: HTMLDivElement, hidden: boolean) {
+    if (hidden) {
+      el.style.opacity = '0'
+      window.setTimeout(() => {
+        el.style.visibility = 'hidden'
+      }, 300)
+    } else {
+      el.style.opacity = '1'
+      el.style.visibility = 'visible'
+    }
   }
 
   /**
