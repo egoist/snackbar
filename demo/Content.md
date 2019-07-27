@@ -111,7 +111,7 @@ Check out [the docs](/docs/interfaces/snackoptions.html#theme) for `theme` optio
 ```js
 import { createSnackbar } from '@egoist/snackbar'
 
-createSnackbar('light theme', {
+createSnackbar('custom theme', {
   theme: {
     backgroundColor: 'magenta',
     actionColor: 'cyan'
@@ -119,7 +119,7 @@ createSnackbar('light theme', {
 })
 ```
 
-<button @click="createSnackbar('light theme', {
+<button @click="createSnackbar('custom theme', {
 theme: {
 backgroundColor: 'magenta',
 actionColor: 'cyan'
