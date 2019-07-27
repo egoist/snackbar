@@ -103,6 +103,7 @@ export class Snackbar {
    */
   el?: HTMLDivElement
   private timeoutId?: number
+  private visibilityTimeoutId?: number
 
   constructor(message: string, options: SnackOptions = {}) {
     const {
@@ -247,11 +248,15 @@ export class Snackbar {
 
   toggleVisibility(el: HTMLDivElement, hidden: boolean) {
     if (hidden) {
-      el.style.opacity = '0'
-      window.setTimeout(() => {
+      this.visibilityTimeoutId = window.setTimeout(() => {
         el.style.visibility = 'hidden'
       }, 300)
+      el.style.opacity = '0'
     } else {
+      if (this.visibilityTimeoutId) {
+        clearTimeout(this.visibilityTimeoutId)
+        this.visibilityTimeoutId = undefined
+      }
       el.style.opacity = '1'
       el.style.visibility = 'visible'
     }
