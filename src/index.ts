@@ -47,6 +47,11 @@ export interface SnackOptions {
    */
   position?: Position
   theme?: 'string' | ThemeRules
+  /**
+   * Maximum stacks to display, earlier created snackbar will be hidden
+   * @default 3
+   */
+  maxStack?: number
 }
 
 export interface SnackInstanceOptions {
@@ -54,6 +59,7 @@ export interface SnackInstanceOptions {
   actions: Action[]
   position: Position
   theme: ThemeRules
+  maxStack: number
 }
 
 export interface SnackResult {
@@ -67,7 +73,17 @@ export interface ThemeRules {
   actionColor?: string
 }
 
-let instances: Snackbar[] = []
+let instances: { [k: string]: Snackbar[] } = {
+  left: [],
+  center: [],
+  right: []
+}
+
+let instanceStackStatus: { [k: string]: boolean } = {
+  left: true,
+  center: true,
+  right: true
+}
 
 const themes: { [name: string]: ThemeRules } = {
   light: {
@@ -87,25 +103,29 @@ export class Snackbar {
    */
   el?: HTMLDivElement
   private timeoutId?: number
+  private visibilityTimeoutId?: number
 
   constructor(message: string, options: SnackOptions = {}) {
     const {
       timeout = 0,
       actions = [{ text: 'dismiss', callback: () => this.destroy() }],
       position = 'center',
-      theme = 'dark'
+      theme = 'dark',
+      maxStack = 3
     } = options
     this.message = message
     this.options = {
       timeout,
       actions,
       position,
+      maxStack,
       theme: typeof theme === 'string' ? themes[theme] : theme
     }
 
     this.wrapper = this.getWrapper(this.options.position)
     this.insert()
-    instances.push(this)
+    instances[this.options.position].push(this)
+    this.stack()
   }
 
   get theme() {
@@ -132,20 +152,24 @@ export class Snackbar {
     el.setAttribute('aria-hidden', 'false')
 
     const { backgroundColor, textColor, boxShadow, actionColor } = this.theme
+
+    const container = document.createElement('div')
+    container.className = 'snackbar--container'
     if (backgroundColor) {
-      el.style.backgroundColor = backgroundColor
+      container.style.backgroundColor = backgroundColor
     }
     if (textColor) {
-      el.style.color = textColor
+      container.style.color = textColor
     }
     if (boxShadow) {
-      el.style.boxShadow = boxShadow
+      container.style.boxShadow = boxShadow
     }
+    el.appendChild(container)
 
     const text = document.createElement('div')
     text.className = 'snackbar--text'
     text.textContent = this.message
-    el.appendChild(text)
+    container.appendChild(text)
 
     // Add action buttons
     if (this.options.actions) {
@@ -170,24 +194,72 @@ export class Snackbar {
             this.destroy()
           }
         })
-        el.appendChild(button)
+        container.appendChild(button)
       }
     }
 
     this.startTimer()
 
-    // Stop timer when mouseenter
-    // Restart timer when mouseleave
     el.addEventListener('mouseenter', () => {
-      this.stopTimer()
+      this.expand()
     })
     el.addEventListener('mouseleave', () => {
-      this.startTimer()
+      this.stack()
     })
 
     this.el = el
 
     this.wrapper.appendChild(el)
+  }
+
+  stack() {
+    instanceStackStatus[this.options.position] = true
+    const positionInstances = instances[this.options.position]
+    const l = positionInstances.length - 1
+    positionInstances.forEach((instance, i) => {
+      // Resume all instances' timers if applicable
+      instance.startTimer()
+      const { el } = instance
+      if (el) {
+        el.style.transform = `translate3d(0, -${(l - i) * 15}px, -${l -
+          i}px) scale(${1 - 0.05 * (l - i)})`
+        const hidden = l - i >= this.options.maxStack
+        this.toggleVisibility(el, hidden)
+      }
+    })
+  }
+
+  expand() {
+    instanceStackStatus[this.options.position] = false
+    const positionInstances = instances[this.options.position]
+    const l = positionInstances.length - 1
+    positionInstances.forEach((instance, i) => {
+      // Stop all instances' timers to prevent destroy
+      instance.stopTimer()
+      const { el } = instance
+      if (el) {
+        el.style.transform = `translate3d(0, -${(l - i) *
+          el.clientHeight}px, 0) scale(1)`
+        const hidden = l - i >= this.options.maxStack
+        this.toggleVisibility(el, hidden)
+      }
+    })
+  }
+
+  toggleVisibility(el: HTMLDivElement, hidden: boolean) {
+    if (hidden) {
+      this.visibilityTimeoutId = window.setTimeout(() => {
+        el.style.visibility = 'hidden'
+      }, 300)
+      el.style.opacity = '0'
+    } else {
+      if (this.visibilityTimeoutId) {
+        clearTimeout(this.visibilityTimeoutId)
+        this.visibilityTimeoutId = undefined
+      }
+      el.style.opacity = '1'
+      el.style.visibility = 'visible'
+    }
   }
 
   /**
@@ -196,11 +268,10 @@ export class Snackbar {
   async destroy() {
     const { el, wrapper } = this
     if (el) {
-      this.el = undefined
-      // Transition the snack away.
+      // Animate the snack away.
       el.setAttribute('aria-hidden', 'true')
       await new Promise(resolve => {
-        const eventName = getTransitionEvent(el)
+        const eventName = getAnimationEvent(el)
         if (eventName) {
           el.addEventListener(eventName, () => resolve())
         } else {
@@ -208,6 +279,24 @@ export class Snackbar {
         }
       })
       wrapper.removeChild(el)
+      // Remove instance from the instances array
+      const positionInstances = instances[this.options.position]
+      let index: number | undefined = undefined
+      for (let i = 0; i < positionInstances.length; i++) {
+        if (positionInstances[i].el === el) {
+          index = i
+          break
+        }
+      }
+      if (index !== undefined) {
+        positionInstances.splice(index, 1)
+      }
+      // Based on current status, refresh stack or expand style
+      if (instanceStackStatus[this.options.position]) {
+        this.stack()
+      } else {
+        this.expand()
+      }
     }
   }
 
@@ -228,17 +317,17 @@ export class Snackbar {
   }
 }
 
-function getTransitionEvent(el: HTMLDivElement): string | undefined {
-  const transitions: { [k: string]: string } = {
-    transition: 'transitionend',
-    OTransition: 'oTransitionEnd',
-    MozTransition: 'transitionend',
-    WebkitTransition: 'webkitTransitionEnd'
+function getAnimationEvent(el: HTMLDivElement): string | undefined {
+  const animations: { [k: string]: string } = {
+    animation: 'animationend',
+    OAnimation: 'oAnimationEnd',
+    MozAnimation: 'Animationend',
+    WebkitAnimation: 'webkitAnimationEnd'
   }
 
-  for (const key of Object.keys(transitions)) {
+  for (const key of Object.keys(animations)) {
     if (el.style[key as any] !== undefined) {
-      return transitions[key]
+      return animations[key]
     }
   }
   return
@@ -249,5 +338,9 @@ export function createSnackbar(message: string, options?: SnackOptions) {
 }
 
 export function destroyAllSnackbars() {
-  return Promise.all(instances.map(instance => instance.destroy()))
+  let instancesArray: Snackbar[] = []
+  Object.keys(instances)
+    .map(position => instances[position])
+    .forEach(positionInstances => instancesArray.push(...positionInstances))
+  return Promise.all(instancesArray.map(instance => instance.destroy()))
 }

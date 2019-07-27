@@ -11,20 +11,18 @@
 
 .snackbar {
   position: fixed;
-  display: flex;
   box-sizing: border-box;
   left: 50%;
-  bottom: 24px;
+  bottom: 14px;
   width: 344px;
   margin-left: -172px;
-  background: #2a2a2a;
-  border-radius: 2px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
   transform-origin: center;
-  color: #eee;
-  cursor: default;
   will-change: transform;
-  animation: snackbar-show 300ms ease forwards 1;
+  transition: transform 300ms ease, opacity 300ms ease;
+}
+
+.snackbar[aria-hidden='false'] {
+  animation: snackbar-show 300ms ease 1;
 }
 
 .snackbar[aria-hidden='true'] {
@@ -51,7 +49,7 @@
 @keyframes snackbar-show {
   from {
     opacity: 0;
-    transform: scale(0.5);
+    transform: translate3d(0, 100%, 0)
   }
 }
 
@@ -70,6 +68,16 @@
     margin-left: 0;
     border-radius: 0;
   }
+}
+
+.snackbar--container {
+  display: flex;
+  background: #2a2a2a;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  color: #eee;
+  cursor: default;
+  margin-bottom: 10px;
 }
 
 .snackbar--text {
