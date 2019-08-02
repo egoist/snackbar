@@ -46,7 +46,7 @@ export interface SnackOptions {
    * @default `center`
    */
   position?: Position
-  theme?: 'string' | ThemeRules
+  theme?: 'light' | 'dark' | ThemeRules
   /**
    * Maximum stacks to display, earlier created snackbar will be hidden
    * @default 3
