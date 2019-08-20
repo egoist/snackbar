@@ -5,8 +5,8 @@ A tiny browser library for showing a brief message at the bottom of the screen (
 ## Use with bundler
 
 ```js
-import { createSnackbar } from '@egoist/snackbar'
-import '@egoist/snackbar/dist/snackbar.css'
+import { createSnackbar } from '@snackbar/core'
+import '@snackbar/core/dist/snackbar.css'
 
 createSnackbar('hello', {
   position: 'right'
@@ -18,10 +18,10 @@ createSnackbar('hello', {
 ```html
 <link
   rel="stylesheet"
-  href="https://unpkg.com/@egoist/snackbar/dist/snackbar.min.css"
+  href="https://unpkg.com/@snackbar/core/dist/snackbar.min.css"
 />
 
-<script src="https://unpkg.com/@egoist/snackbar/dist/snackbar.min.js"></script>
+<script src="https://unpkg.com/@snackbar/core/dist/snackbar.min.js"></script>
 
 <script>
   snackbar.createSnackbar('hello')
@@ -43,7 +43,7 @@ createSnackbar('hello', {
 ### Destory all snackbars
 
 ```js
-import { destroyAllSnackbars } from '@egoist/snackbar'
+import { destroyAllSnackbars } from '@snackbar/core'
 
 destroyAllSnackbars()
 ```
@@ -53,7 +53,7 @@ destroyAllSnackbars()
 ### Self-destroy in specific timeout
 
 ```js
-import { createSnackbar } from '@egoist/snackbar'
+import { createSnackbar } from '@snackbar/core'
 
 createSnackbar('hello world', {
   timeout: 2000 // 2 seconds
@@ -67,7 +67,7 @@ timeout: 2000 // 2 seconds
 ### Custom action button
 
 ```js
-import { createSnackbar } from '@egoist/snackbar'
+import { createSnackbar } from '@snackbar/core'
 
 createSnackbar('hello world', {
   actions: [
@@ -93,7 +93,7 @@ Check out [the docs](/docs/interfaces/snackoptions.html#actions) for `actions` o
 ### Light theme
 
 ```js
-import { createSnackbar } from '@egoist/snackbar'
+import { createSnackbar } from '@snackbar/core'
 
 createSnackbar('light theme', {
   theme: 'light'
@@ -109,7 +109,7 @@ Check out [the docs](/docs/interfaces/snackoptions.html#theme) for `theme` optio
 ### Custom theme
 
 ```js
-import { createSnackbar } from '@egoist/snackbar'
+import { createSnackbar } from '@snackbar/core'
 
 createSnackbar('custom theme', {
   theme: {

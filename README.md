@@ -1,13 +1,13 @@
-# @egoist/snackbar
+# @snackbar/core
 
-[![NPM version](https://badgen.net/npm/v/@egoist/snackbar)](https://npmjs.com/package/@egoist/snackbar) [![NPM downloads](https://badgen.net/npm/dm/@egoist/snackbar)](https://npmjs.com/package/@egoist/snackbar) [![CircleCI](https://badgen.net/circleci/github/egoist/snackbar/master)](https://circleci.com/gh/egoist/snackbar/tree/master) [![donate](https://badgen.net/badge/support%20me/donate/ff69b4)](https://patreon.com/egoist) [![chat](https://badgen.net/badge/chat%20on/discord/7289DA)](https://chat.egoist.moe)
+[![NPM version](https://badgen.net/npm/v/@snackbar/core)](https://npmjs.com/package/@snackbar/core) [![NPM downloads](https://badgen.net/npm/dm/@snackbar/core)](https://npmjs.com/package/@snackbar/core) [![CircleCI](https://badgen.net/circleci/github/egoist/snackbar/master)](https://circleci.com/gh/egoist/snackbar/tree/master) [![donate](https://badgen.net/badge/support%20me/donate/ff69b4)](https://patreon.com/egoist) [![chat](https://badgen.net/badge/chat%20on/discord/7289DA)](https://chat.egoist.moe)
 
 ![preview](./media/snack.gif)
 
 ## Install
 
 ```bash
-yarn add @egoist/snackbar
+yarn add @snackbar/core
 ```
 
 ## Documentation
