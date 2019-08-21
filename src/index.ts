@@ -94,8 +94,10 @@ const themes: { [name: string]: ThemeRules } = {
   dark: {}
 }
 
+export type Message = string | HTMLElement
+
 export class Snackbar {
-  message: string
+  message: Message
   options: SnackInstanceOptions
   wrapper: HTMLDivElement
   /**
@@ -105,7 +107,7 @@ export class Snackbar {
   private timeoutId?: number
   private visibilityTimeoutId?: number
 
-  constructor(message: string, options: SnackOptions = {}) {
+  constructor(message: Message, options: SnackOptions = {}) {
     const {
       timeout = 0,
       actions = [{ text: 'dismiss', callback: () => this.destroy() }],
@@ -166,9 +168,14 @@ export class Snackbar {
     }
     el.appendChild(container)
 
+    // Append message
     const text = document.createElement('div')
     text.className = 'snackbar--text'
-    text.textContent = this.message
+    if (typeof this.message === 'string') {
+      text.textContent = this.message
+    } else {
+      text.appendChild(this.message)
+    }
     container.appendChild(text)
 
     // Add action buttons
@@ -333,7 +340,7 @@ function getAnimationEvent(el: HTMLDivElement): string | undefined {
   return
 }
 
-export function createSnackbar(message: string, options?: SnackOptions) {
+export function createSnackbar(message: Message, options?: SnackOptions) {
   return new Snackbar(message, options)
 }
 
