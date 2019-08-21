@@ -94,7 +94,7 @@ const themes: { [name: string]: ThemeRules } = {
   dark: {}
 }
 
-type Message = string | HTMLElement
+export type Message = string | HTMLElement
 
 export class Snackbar {
   message: Message
