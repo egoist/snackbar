@@ -64,6 +64,19 @@ createSnackbar('hello world', {
 timeout: 2000 // 2 seconds
 })">Show message</button>
 
+### Use a DOM node as message
+
+```js
+import { createSnackbar } from '@snackbar/core'
+
+const message = document.createElement('div')
+message.innerHTML = `<strong style="color:pink">DOM node</strong>`
+
+createSnackbar(message)
+```
+
+<button @click="createDOMNodeSnackbar">Show message</button>
+
 ### Custom action button
 
 ```js
@@ -154,6 +167,13 @@ export default {
           }
         ]
       })
+    },
+
+    createDOMNodeSnackbar() {
+      const message = document.createElement('div')
+      message.innerHTML = `<strong style="color:pink">DOM node</strong>`
+
+      createSnackbar(message)
     }
   }
 }
