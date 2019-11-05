@@ -40,7 +40,7 @@
     "postcss-preset-env": "^6.6.0",
     "prettier": "^1.15.2",
     "prismjs": "^1.16.0",
-    "rollup-plugin-typescript2": "^0.24.2",
+    "rollup-plugin-typescript2": "^0.25.2",
     "typedoc": "^0.15.0",
     "typescript": "^3.4.5",
     "vmark": "^1.1.0",
