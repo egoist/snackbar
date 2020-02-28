@@ -34,9 +34,7 @@ createSnackbar('hello', {
 
 [GitHub repo](https://github.com/egoist/snackbar)
 
-[Buy me a coffee](https://ko-fi.com/support_egoist)
-
-[Support me on Patreon](https://patreon.com/egoist)
+[Sponsor me on GitHub](https://github.com/sponsors/egoist)
 
 ## Examples
 
