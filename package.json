@@ -34,7 +34,7 @@
   "devDependencies": {
     "@poi/plugin-typescript": "^12.2.1",
     "bili": "^4.7.3",
-    "husky": "^3.0.0",
+    "husky": "^4.2.4",
     "lint-staged": "^9.0.2",
     "poi": "^12.6.8",
     "postcss-preset-env": "^6.6.0",
