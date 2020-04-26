@@ -38,7 +38,7 @@
     "lint-staged": "^10.1.7",
     "poi": "^12.6.8",
     "postcss-preset-env": "^6.6.0",
-    "prettier": "^1.15.2",
+    "prettier": "^2.0.5",
     "prismjs": "^1.16.0",
     "rollup-plugin-typescript2": "^0.24.2",
     "typedoc": "^0.15.0",
