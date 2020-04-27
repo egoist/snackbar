@@ -823,9 +823,9 @@
     posthtml "^0.11.3"
 
 "@poi/plugin-typescript@^12.2.1":
-  version "12.2.1"
-  resolved "https://registry.yarnpkg.com/@poi/plugin-typescript/-/plugin-typescript-12.2.1.tgz#7f93e36db28cffd3a0c2470918cec55f39706f2c"
-  integrity sha512-WmfDCm5wktL+PEOmNSJHwhqqdBu31bnGewMemB11ZbV7slFLczjgab0p59ZoMSnU4NTWd+v8YO6slMT2wgVGEQ==
+  version "12.3.0"
+  resolved "https://registry.yarnpkg.com/@poi/plugin-typescript/-/plugin-typescript-12.3.0.tgz#5ca6b2b4c0753b4b34b0cfd59a95080d4e05fd61"
+  integrity sha512-yHvZuWhgPxEaogUDzdarvqc6U1wftvPeh8gYbB0j4DJbOFSeuI/Z+Lu/x8s/qH2dmfNGQrbp15Q7tt9LJ3trAw==
   dependencies:
     fork-ts-checker-webpack-plugin "^0.5.0"
     ts-loader "^5.3.0"
