@@ -113,7 +113,8 @@ export class Snackbar {
       actions = [{ text: 'dismiss', callback: () => this.destroy() }],
       position = 'center',
       theme = 'dark',
-      maxStack = 3
+      maxStack = 3,
+      attachTo = document.body
     } = options
     this.message = message
     this.options = {
@@ -121,10 +122,11 @@ export class Snackbar {
       actions,
       position,
       maxStack,
-      theme: typeof theme === 'string' ? themes[theme] : theme
+      theme: typeof theme === 'string' ? themes[theme] : theme,
+      attachTo
     }
 
-    this.wrapper = this.getWrapper(this.options.position)
+    this.wrapper = this.getWrapper(this.options.position, this.options.attachTo)
     this.insert()
     instances[this.options.position].push(this)
     this.stack()
@@ -134,14 +136,14 @@ export class Snackbar {
     return this.options.theme
   }
 
-  getWrapper(position: Position): HTMLDivElement {
+  getWrapper(position: Position, attachTo: HTMLElement): HTMLDivElement {
     let wrapper = document.querySelector(
       `.snackbars-${position}`
     ) as HTMLDivElement
     if (!wrapper) {
       wrapper = document.createElement('div')
       wrapper.className = `snackbars snackbars-${position}`
-      document.body.appendChild(wrapper)
+      attachTo.appendChild(wrapper)
     }
     return wrapper
   }
