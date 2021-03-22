@@ -41,7 +41,7 @@
     "prettier": "^2.0.5",
     "prismjs": "^1.16.0",
     "rollup-plugin-typescript2": "^0.27.0",
-    "typedoc": "^0.17.6",
+    "typedoc": "^0.20.33",
     "typescript": "^3.4.5",
     "vmark": "^1.1.0",
     "vmark-loader": "^1.0.0",
