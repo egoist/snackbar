@@ -33,7 +33,7 @@
   "dependencies": {},
   "devDependencies": {
     "@poi/plugin-typescript": "^12.2.1",
-    "bili": "^4.7.3",
+    "bili": "^5.0.5",
     "husky": "^4.2.5",
     "lint-staged": "^10.1.7",
     "poi": "^12.6.8",
