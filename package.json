@@ -35,7 +35,7 @@
     "@poi/plugin-typescript": "^12.2.1",
     "bili": "^4.7.3",
     "husky": "^4.2.5",
-    "lint-staged": "^10.1.7",
+    "lint-staged": "^11.0.1",
     "poi": "^12.6.8",
     "postcss-preset-env": "^6.6.0",
     "prettier": "^2.0.5",
