@@ -1,6 +1,6 @@
 # @snackbar/core
 
-[![NPM version](https://badgen.net/npm/v/@snackbar/core)](https://npmjs.com/package/@snackbar/core) [![NPM downloads](https://badgen.net/npm/dm/@snackbar/core)](https://npmjs.com/package/@snackbar/core) [![CircleCI](https://badgen.net/circleci/github/egoist/snackbar/master)](https://circleci.com/gh/egoist/snackbar/tree/master) [![donate](https://badgen.net/badge/support%20me/donate/ff69b4)](https://patreon.com/egoist) [![chat](https://badgen.net/badge/chat%20on/discord/7289DA)](https://chat.egoist.moe)
+[![NPM version](https://badgen.net/npm/v/@snackbar/core)](https://npmjs.com/package/@snackbar/core) [![NPM downloads](https://badgen.net/npm/dm/@snackbar/core)](https://npmjs.com/package/@snackbar/core) [![CircleCI](https://badgen.net/circleci/github/egoist/snackbar/master)](https://circleci.com/gh/egoist/snackbar/tree/master) [![donate](https://badgen.net/badge/support%20me/donate/ff69b4)](https://patreon.com/egoist)
 
 ![preview](./media/snack.gif)
 
@@ -12,7 +12,7 @@ yarn add @snackbar/core
 
 ## Documentation
 
-📝 **https://snackbar.egoist.sh**
+📝 **https://snackbar.egoist.dev**
 
 ## Contributing
 
@@ -27,4 +27,4 @@ yarn add @snackbar/core
 **snackbar** © [EGOIST](https://github.com/egoist), Released under the [MIT](./LICENSE) License.<br>
 Authored and maintained by EGOIST with help from contributors ([list](https://github.com/egoist/snackbar/contributors)).
 
-> [egoist.sh](https://egoist.sh) · GitHub [@EGOIST](https://github.com/egoist) · Twitter [@\_egoistlily](https://twitter.com/_egoistlily)
+> [egoist.dev](https://egoist.dev) · GitHub [@EGOIST](https://github.com/egoist) · Twitter [@localhost_5173](https://twitter.com/localhost_5173)
